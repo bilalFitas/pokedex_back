@@ -54,6 +54,16 @@ public class PokemonController {
 		return this.pokemonRepository.findAllByOrderByIdDesc(page);
 	}
 	
+	@GetMapping("/pokemon/{id:[0-9]+}/details")
+	public ResponseEntity<Pokemon> findAllById(@PathVariable("id") int id){
+		Optional<Pokemon> pokemon = this.pokemonRepository.findById(id);
+		if(!pokemon.isPresent())
+			return new ResponseEntity<Pokemon>(HttpStatus.NOT_FOUND);
+			
+		return new ResponseEntity<Pokemon>(pokemon.get(), HttpStatus.OK);
+	}
+	
+	
 	@GetMapping("/list-type")
 	public ResponseEntity<List<String>> findDistinctType1(){
 		List<String> list_type = this.pokemonRepository.findAllType();
@@ -67,6 +77,8 @@ public class PokemonController {
 		return this.pokemonRepository.findByType1OrType2Like(page, type1, type2);
 	}
 
+	
+	
 	@GetMapping("/pokemon/max/{key:[a-zA-Z]+}")
 	public ResponseEntity<Page<Pokemon>> findPokemonMaxDimension(
 			@PathVariable("key") String key,
