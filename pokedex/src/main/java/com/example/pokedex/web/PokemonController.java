@@ -54,8 +54,8 @@ public class PokemonController {
 		return this.pokemonRepository.findAllByOrderByIdDesc(page);
 	}
 	
-	@GetMapping("/pokemon/{id:[0-9]+}/details")
-	public ResponseEntity<Pokemon> findAllById(@PathVariable("id") int id){
+	@GetMapping("/pokemon/details/{id:[0-9]+}")
+	public ResponseEntity<Pokemon> findById(@PathVariable("id") int id){
 		Optional<Pokemon> pokemon = this.pokemonRepository.findById(id);
 		if(!pokemon.isPresent())
 			return new ResponseEntity<Pokemon>(HttpStatus.NOT_FOUND);
