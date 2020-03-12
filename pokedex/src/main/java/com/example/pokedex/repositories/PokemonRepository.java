@@ -1,6 +1,7 @@
 package com.example.pokedex.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ public interface PokemonRepository extends PagingAndSortingRepository<Pokemon, I
 	public Page<Pokemon> findAllByOrderByIdAsc(Pageable page);
 	public Page<Pokemon> findAllByOrderByIdDesc(Pageable page);
 	
-	public Page<Pokemon> findByType1OrType2Like(Pageable page, String type1, String type2);
+	public Page<Pokemon> findByType1OrType2Like(Pageable page, Optional<String> type, Optional<String> type2);
 	
 	@Query(value= "SELECT  DISTINCT type1 FROM Pokemon")
 	public List<String> findAllType();
