@@ -71,7 +71,7 @@ public class PokemonController {
 	}
 	
 	@GetMapping("/search/types")
-	public Page<Pokemon> findByType1Asc(@PageableDefault(page = 0, size = 200) Pageable page,
+	public Page<Pokemon> findByType1Asc(@PageableDefault(page = 0, size = 8) Pageable page,
 										@RequestParam("type1") String type1,
 										@RequestParam("type2") String type2){
 		return this.pokemonRepository.findByType1OrType2Like(page, type1, type2);
